@@ -4,11 +4,11 @@
 
 Open endpoint requires no authentication
 
-** Auth required ** : NO
+**Auth required** : NO
 
 * [Register] : `POST /api/auth/register`
 
-** Data Example **
+**Data Example**
 
 ```json
 {
@@ -18,7 +18,7 @@ Open endpoint requires no authentication
 ```
 ## Success Response
 
-** Code ** : `201 CREATED`
+**Code** : `201 CREATED`
 
 ```json
 {
@@ -29,18 +29,18 @@ Open endpoint requires no authentication
 
 ## Error Response
 
-** Condition ** : If 'email' and 'password' combination is wrong
+**Condition** : If 'email' and 'password' combination is wrong
 
 ```json
 {
  	"message": "error..."
 }
 ```
-** Auth required ** : NO
+**Auth required** : NO
 
 * [Login] : `POST /api/auth/login`
 
-** Data Example **
+**Data Example**
 
 ```json
 {
@@ -51,7 +51,7 @@ Open endpoint requires no authentication
 
 ## Success Response
 
-** Code ** : `200 OK`
+**Code** : `200 OK`
 
 ```json
 {
@@ -61,9 +61,9 @@ Open endpoint requires no authentication
 
 ## Error Response
 
-** Condition ** : If 'email' and 'password' combination is wrong
+**Condition** : If 'email' and 'password' combination is wrong
 
-** Code ** : `400 Bad Request`
+**Code** : `400 Bad Request`
 
 ```json
 {
