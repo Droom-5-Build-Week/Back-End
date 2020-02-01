@@ -31,7 +31,7 @@ exports.up = function(knex) {
 				.onUpdate('CASCADE');
 		})
 
-		.createTable('users-likes', tbl => {
+		.createTable('likes-company', tbl => {
 			tbl.increments();
 			tbl.integer('user_id')
 				.unsigned()
@@ -47,27 +47,6 @@ exports.up = function(knex) {
 				.inTable('companies')
 				.onDelete('CASCADE')
 				.onUpdate('CASCADE');
-		})
-
-		.createTable('users-likes-company', tbl => {
-			tbl.increments();
-			tbl.integer('user_id')
-				.unsigned()
-				.notNullable()
-				.references('id')
-				.inTable('companies')
-				.onDelete('CASCADE')
-				.onUpdate('CASCADE');
-			tbl.integer('company_id')
-				.unsigned()
-				.notNullable()
-				.references('id')
-				.inTable('companies')
-				.onDelete('CASCADE')
-				.onUpdate('CASCADE');
-			tbl.boolean('likes')
-				.defaultTo(false)
-				.notNullable();
   })
 };
 
