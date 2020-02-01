@@ -9,6 +9,13 @@ exports.up = function(knex) {
     		.notNullable();
     	tbl.string('bio')
     		.notNullable();
+        tbl.integer('user_id')
+            .unsigned()
+            .notNullable()
+            .references('id')
+            .inTable('companies')
+            .onDelete('CASCADE')
+            .onUpdate('CASCADE');    
     })
     .createTable('jobs', tbl => {
     	tbl.increments();
@@ -32,11 +39,11 @@ exports.up = function(knex) {
     	tbl.increments();
     	tbl.string('name')
     		.notNullable();
-    	tbl.integer('company_id')
+    	tbl.integer('job_id')
     		.unsigned()
     		.notNullable()
     		.references('id')
-    		.inTable('companies')
+    		.inTable('jobs')
     		.onDelete('CASCADE')
     		.onUpdate('CASCADE');
     })
