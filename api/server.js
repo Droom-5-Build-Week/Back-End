@@ -8,11 +8,22 @@ const usersRouter = require('../users/users-router.js');
 const server = express();
 
 server.use(helmet());
-server.use(express.json());
 server.use(cors());
+server.use(express.json());
+server.use(logger);
 
-server.use('/api', authRouter);
-server.use('/api/users', usersRouter);
+function logger(req, res, next) {
+	const date = new Date(Date.now());
+	console.log(`METHOD: ${req.method}`);
+	console.log(`URL: ${req.originalUrl}`);
+	console.log(`DATE: ${date.toDateString()}, ${date.toTimeString()}`);
+	next();
+}
+
+server.use('/api/auth', authRouter);
+//server.use('/api/users', usersRouter);
+//server.use('/api/companies', companiesRouter);
+//server.use('/api/employees', employeesRouter);
 
 server.get('/', (req, res) => {
 	res.send('up!');
