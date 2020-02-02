@@ -10,24 +10,26 @@ module.exports = {
 };
 
 function find() {
-	return db('users').select('id', 'email');
+	return db('hunters').select('id', 'user_id');
 }
 
 function findBy(filter) {
-	return db('users').where(filter);
+	return db('hunters').where(filter);
 }
 
+// MARK: -- Add to hunter db
 async function add(user) {
-	const [id] = await db('users').insert(user);
+	const { user_id } = user;
+	const [id] = await db('hunters').insert(user);
 	return findById(id);
 }
 
 function findById(id) {
-	return db('users').where('id', id).first();
+	return db('hunters').where('id', id).first();
 }
 
 function update(id, changes) {
-	return db('users')
+	return db('hunters')
 		.where('id', id)
 		.update(changes, 'id')
 		.then(() => {
@@ -37,5 +39,5 @@ function update(id, changes) {
 }
 
 function remove(id) {
-	return db('users').where('id', id).del()
+	return db('hunters').where('id', id).del()
 }
