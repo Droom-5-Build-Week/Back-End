@@ -1,8 +1,6 @@
 # Back-End API Doc
 
-## Open Endpoints
-
-Open endpoint requires no authentication
+## Registration
 
 **Auth required** : NO
 
@@ -16,7 +14,7 @@ Open endpoint requires no authentication
 	"password": "yourpasswordhere"
 }
 ```
-## Success Response
+# Success Response
 
 **Code** : `201 CREATED`
 
@@ -27,7 +25,7 @@ Open endpoint requires no authentication
 }
 ```
 
-## Error Response
+# Error Response
 
 **Condition** : If 'email' and 'password' combination is wrong
 
@@ -36,6 +34,9 @@ Open endpoint requires no authentication
  	"message": "error..."
 }
 ```
+
+## Login
+
 **Auth required** : NO
 
 * [Login] : `POST /api/auth/login`

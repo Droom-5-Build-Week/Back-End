@@ -18,7 +18,7 @@ router.post('/register', (req, res) => {
 						res.status(201).json(usr);
 					})
 					.catch(err => {
-						res.status(400).json({ message: `${err}`);
+						res.status(400).json({ message: `${err}`});
 					})
 			}
 		});
@@ -26,9 +26,9 @@ router.post('/register', (req, res) => {
 });
 
 router.post('/login', (req, res) => {
-	let { username, password } = req.body;
+	let { email, password } = req.body;
 
-	Users.findBy({ username })
+	Users.findBy({ email })
 		.first()
 		.then(user => {
 			if (user) {
@@ -57,7 +57,7 @@ function signToken(user) {
 		id: user.id
 	};
 	const options = {
-		expresIn: '8h'
+		expiresIn: '8h'
 	};
 	return jwt.sign(payload, jwtSecret, options);
 }
