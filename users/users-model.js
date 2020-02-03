@@ -48,13 +48,14 @@ function findUserDetails(id) {
 		.then(interests => {
 			return db('experiences as e')
 				.where('e.user_id', id)
+				.join('interests', 'interests.user_id', 'e.user_id')
 				.select('e.company_name', 'e.job_title')
 				.then(experiences => {
 					return db('skills as s')
 						.where('s.user_id', id)
+						.join('experiences', 'experiences.user_id', 's.user_id')
 						.select('s.skill_name')
 						.then(skills => {
-
 							return db('users')
 								.where('id', id)
 								.select('email', 'name', 'location')
@@ -62,8 +63,9 @@ function findUserDetails(id) {
 								.then(user => {
 									return {
 										...user,
-										experiences,
 										interests,
+										skills,
+										experiences,
 									}
 								})
 
