@@ -1,55 +1,52 @@
-const db = require('../database/db-config.js');
+const db = require('../database/db-Config');
 
 module.exports = {
-	findHunter
 	add,
 	find,
 	findById,
 	update,
-	remove,
+	remove
 };
 
-// MARK: -- Find hunter_id
-function findHunter(id) {
-	return db('hunters')
-		.where('user_id', id)
-		.select('id')
-		.first();
-}
-
-// MARK: -- Add experience to hunter profile
-async function add(user_id, hunter_experience) {
-	const id = await findHunter(user_id);
-	const update = hunter_experience.map(experience => {
-		return { id, ...experience };
-	});
-
-	return db('experience').insert(update)
+// MARK: -- Add experience to hunter
+async function add(id, experience) {
+	return db('experiences')
+	.insert({
+		"company_name": experience.company_name, 
+		"job_title": experience.job_title, 
+		"user_id": id 
+	})
 		.then(() => {
-			return db('experience').where('id', id);
+			return db('experiences').where("user_id", id)
 		})
 }
 
-// MARK: -- Find all experience for hunter profile
-async function find(user_id) {
-	const id = await findHunter(user_id)
-	return db('experience').where('hunter_id', id)
+// MARK: -- Find all experiences for hunter
+function find(userId) {
+	return db('experiences').where('user_id', userId)
 }
 
-// MARK: -- Find by experience identifier
+// MARK: -- Find by id
 function findById(id) {
-	return db('experience').where('id', id).first();
+	return db('experiences').where('id', id).first();
 }
 
-// MARK: -- Update an experience
+// MARK: -- Update
 async function update(id, experience) {
-	return await db('experience').where('id', id).update(experience)
-		.then(() => {
-			return db('experience').where('id', id).first();
+	return await db('experiences')
+		.where('id', id)
+		.update({
+			"company_name": experience.company_name, 
+			"job_title": experience.job_title, 
+			"user_id": id 
 		})
+		.then(() => {
+			return db('experiences').where('id', id).first();
+		})
+
 }
 
-// MARK: -- remove an experience
-async function remove(id) {
-	return await db('experience').where('id', id).del()
+// MARK: -- Delete (look back to later)
+async function remove(user_id, id) {
+	return await db('experiences').where('id', id).del()
 }

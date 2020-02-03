@@ -5,17 +5,15 @@ module.exports = {
 	find,
 	findById,
 	update,
-	remove,
-	findHunter
+	remove
 };
 
 // MARK: -- Add Skill to hunter
 async function add(id, skill) {
-	let id = db('users').where('id', id).select('id').first();
-
-	return db('skills').insert(skill)
+	//let user_id = db('users').where('id', id).select('id').first();
+	return db('skills').insert({"user_id": id, "skill_name": skill})
 		.then(() => {
-			return db('skills').where('user_id', id)
+			return db('skills').where("user_id", id)
 		})
 }
 
@@ -33,7 +31,7 @@ function findById(id) {
 async function update(id, skill) {
 	return await db('skills')
 		.where('id', id)
-		.update(skill)
+		.update({"skill_name": skill})
 		.then(() => {
 			return db('skills').where('id', id).first();
 		})
@@ -43,8 +41,4 @@ async function update(id, skill) {
 // MARK: -- Delete
 async function remove(id) {
 	return await db('skills').where('id', id).del()
-}
-
-function findHunter(id) {
-	return db('hunters_skills').where('user_id', id).first();
 }
