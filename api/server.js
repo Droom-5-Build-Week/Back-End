@@ -4,6 +4,7 @@ const cors = require('cors');
 
 const authRouter = require('../auth/auth-router.js');
 const usersRouter = require('../users/users-router.js');
+const skillsRouter = require('../users/skills-router.js');
 
 const server = express();
 
@@ -21,7 +22,8 @@ function logger(req, res, next) {
 }
 
 server.use('/api/auth', authRouter);
-//server.use('/api/users', usersRouter);
+server.use('/api/users/:user_id/skills', skillsRouter);
+server.use('/api/users', usersRouter);
 //server.use('/api/companies', companiesRouter);
 //server.use('/api/employees', employeesRouter);
 
