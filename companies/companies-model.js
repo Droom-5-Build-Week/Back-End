@@ -1,51 +1,24 @@
 const db = require('../database/db-config.js');
 
 module.exports = {
-	add,
 	find,
 	findBy,
 	findById,
 	update,
-	remove
+	remove,
+	findUserDetails
 };
 
-// MARK: - CREATE
-async function add(user_id, company) {
-	const new_company = {
-		user_id,
-		...company
-	}
-
-	const [id] = await db('companies').insert(new_company).select('id')
-	return findById(id);
-}
-
-// MARK: - GET ALL
 function find() {
-	return db('companies')
+	return db('companies').select('id', 'email', 'name');
 }
 
-// MARK: - GET BY ID
-function findById(company_id) {
-	return db('companies')
-			.where('id', company_id)
-			.select('name', 'profile_picture', 'sector' 'bio')
-			.then(company => {
-				return db('jobs')
-					.where('company_id', company_id)
-					.select('title', 'type', 'job_bio', 'experience_preference')
-					.then(jobs => {
-						return db('job_skills')
-							.join('jobs', 'job_skills.job_id', 'jobs.id')
-							.then(skills => {
-								return {
-									...company,
-									jobs
-								};
-							})
-					})
-			})
+function findBy(filter) {
+	return db('companies').where(filter);
+}
 
+function findById(id) {
+	return db('companies').where('id', id).first();
 }
 
 function update(id, changes) {
@@ -60,4 +33,35 @@ function update(id, changes) {
 
 function remove(id) {
 	return db('companies').where('id', id).del()
+}
+
+function findUserDetails(id) {
+	return db('interests')
+		.where('user_id', id)
+		.select('topic')
+		.then(interests => {
+			return db('experiences as e')
+				.where('e.user_id', id)
+				.select('e.company_name', 'e.job_title')
+				.then(experiences => {
+					return db('skills as s')
+						.where('s.user_id', id)
+						.select('s.skill_name')
+						.then(skills => {
+
+							return db('users')
+								.where('id', id)
+								.select('email', 'name', 'location')
+								.first()
+								.then(user => {
+									return {
+										...user,
+										experiences,
+										interests,
+									}
+								})
+
+						})
+				})
+		})
 }

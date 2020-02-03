@@ -1,77 +1,60 @@
 const router = require('express').Router();
-const Companies = require('./companies-model.js');
 
-// MARK: -- GET All
+const Comp = require('./companies-model.js');
+const restricted = require('../auth/restricted-middleware.js');
+
 router.get('/', (req, res) => {
-	Companies.find()
+	Comp.find()
 		.then(companies => {
-			res.status(200).json(companies)
+			res.json(companies);
 		})
 		.catch(err => {
-			res.status(500).json({ message: '🤔, we can\'t find all the companies' });
+			res.send(err);
+		})
+});
+
+router.get('/:id', (req, res) => {
+	const id = req.params.id;
+	Comp.findById(id)
+		.then(company => {
+			res.json(company);
+		})
+		.catch(err => {
+			console.log(err)
+			res.status(500).json({ message: 'could not find user' })
 		})
 })
 
-// MAKR: -- GET 1
-router.get('/:id', (req, res) => {
-	if(id) {
-		Companies.findById(id)
-			.then(company => {
-				res.status(200).json(company)
-			})
-			.catch(err => {
-				res.status(500).json('🤔, we couldn\'t find the single company');
-			})
-	} else {
-		res.status(404).json({ message: 'this company does not exist in our database' });
-	}
-})
-
-// MARK: -- POST
-router.post('/', (req, res) => {
-	const { user_id, company } = req.body
-	if(!company.name || !company.profile_picture, || !company.sector, !company.bio) {
-		res.status(406).json({ message: 'Please send all of the company data that is needed to store in the Database' })
-	} else {
-		Companies.add(user_id, company)
-			.then(company => {
-				res.status(201).json(company)
-			})
-			.catch(err => {
-				res.status(500).json(err);
-			})
-	}
-})
-
-// MARK: -- PUT
-router.put(':/id', (req, res) => {
-	const id = req.params.id;
-	const changes = req.body;
-	if(id) {
-		Companies.update(id, changes)
-			.then(company => {
-				res.status(200).json(company);
-			})
-			.catch(err => {
-				res.status(500).json(err);
-			})
-	} else {
-		res.status(404).json({ message: 'could not find company with specified id'})
-	}
-})
-
-// MARK: -- DELETE
-router.delete(':/id', (req, res) => {
+router.put('/:id', (req, res) => {
 	const id = req.params.id
-	if(id) {
-		Companies.remove(id)
-			.then(deleted => {
-				res.status(204)
+	const changes = req.body;
+	if (id && changes) {
+		Comp.update(id, changes)
+			.then(user => {
+				res.status(201).json(user);
 			})
-			.catch(500).json({ message: 'could not delete company from database' })
+			.catch(err => {
+				console.log(err);
+				res.status(500).json({ message: 'Could not update user' });
+			})
 	} else {
-		res.status(404).json({ message: 'could not find company with specified id' })
+		res.status(400).json({ message: 'Nothing was update for the user' });
 	}
+})
+
+router.delete('/:id', (req, res) => {
+	const id = req.params.id;
+	Comp.remove(id)
+		.then(removed => {
+			if (removed) {
+				res.status(200).json({ message: 'User successfully deleted' });
+			} else {
+				res.status(404).json({ message: 'Could not find user' });
+			}
+		})
+		.catch(err => {
+			res.status(500).json({ message: 'Could not delete user' })
+		})
 })
 
 module.exports = router;
