@@ -5,6 +5,8 @@ const cors = require('cors');
 const authRouter = require('../auth/auth-router.js');
 const usersRouter = require('../users/users-router.js');
 const skillsRouter = require('../users/skills-router.js');
+const experiencesRouter = require('../users/experiences-router.js');
+const interestsRouter = require('../users/interests-router.js');
 
 const server = express();
 
@@ -22,10 +24,8 @@ function logger(req, res, next) {
 }
 
 server.use('/api/auth', authRouter);
-server.use('/api/users/:user_id/skills', skillsRouter);
-server.use('/api/users', usersRouter);
-//server.use('/api/companies', companiesRouter);
-//server.use('/api/employees', employeesRouter);
+server.use('/api/users', skillsRouter, experiencesRouter, interestsRouter, usersRouter);
+
 
 server.get('/', (req, res) => {
 	res.send('up!');
