@@ -6,7 +6,7 @@ exports.up = function(knex) {
 		tbl.boolean('company_likes_hunter').defaultTo(false);
 		tbl.boolean('matched').defaultTo(false);
 
-	  	tbl.integers('job_id')
+	  	tbl.integer('job_id')
 	  		.unsigned()
 			.notNullable()
 			.references('id')
@@ -14,7 +14,7 @@ exports.up = function(knex) {
 			.onDelete('CASCADE')
 			.onUpdate('CASCADE');
 
-		tbl.integers('hunter_id')
+		tbl.integer('hunter_id')
 			.unsigned()
 			.notNullable()
 			.references('id')
