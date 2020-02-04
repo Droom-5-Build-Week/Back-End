@@ -1,5 +1,5 @@
 
-exports.up = function(knex) {
+exports.up = function (knex) {
 	return knex.schema.createTable('matches', tbl => {
 		tbl.increments();
 
@@ -22,8 +22,9 @@ exports.up = function(knex) {
 		tbl.boolean('user_match').defaultTo(false);
 		tbl.boolean('job_match').defaultTo(false);
 		tbl.boolean('matched').defaultTo(false);
-})};
+	})
+};
 
-exports.down = function(knex) {
+exports.down = function (knex) {
 	return knex.schema.dropTableIfExists('matches');
 };

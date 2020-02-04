@@ -4,7 +4,7 @@ const random_id = () => {
   return Math.floor((Math.random() * 50) + 1)
 }
 
-const random_duration = () => {
+const random_type = () => {
   let i = Math.floor((Math.random() * 3))
   const arr = ['long-term', 'short-term', 'contract']
   return arr[i];
@@ -12,9 +12,9 @@ const random_duration = () => {
 
 const createFakerJobs = () => ({
   position_name: faker.name.jobTitle(),
-  type: faker.name.jobType(),
+  type: random_type(),
   job_bio: faker.lorem.paragraph(),
-  duration: random_duration(),
+  duration: "",
   company_id: random_id()
 });
 

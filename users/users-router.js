@@ -18,7 +18,7 @@ router.get('/:id', (req, res) => {
 		if(id) {
 			Users.findUserDetails(id)
 				.then(user => {
-					res.json(user);
+					res.status(200).json(user);
 				})
 				.catch(err => {
 					console.log(err)

@@ -8,11 +8,7 @@ module.exports = {
     findByType
 };
 
-// tbl.string('position_name').notNullable();
-// 			tbl.string('type').notNullable();
-// 			tbl.string('job_bio').notNullable();
-// 			tbl.string('duration').notNullable();
-// 			tbl.integer('company_id')
+
 // MARK: -- Add Skill to hunter
 async function add(id, job) {
     //let user_id = db('users').where('id', id).select('id').first();
@@ -24,7 +20,9 @@ async function add(id, job) {
 // MARK: -- Find all skills for hunter
 function find(companyId) {
     return db('jobs').where('company_id', companyId)
+    .select('position_name', 'type', 'job_bio', 'duration', 'id');
 }
+
 // MARK: -- Find by id
 function findById(id) {
     return db('jobs').where('id', id).first();
