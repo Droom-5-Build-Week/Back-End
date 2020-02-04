@@ -7,8 +7,23 @@ router.get('/:user_id/interests', (req, res) => {
     const { user_id } = req.params;
     if ( user_id ) {
         Interests.find(user_id)
-            .then(exps => {
-                res.status(200).json(exps)
+            .then(ints => {
+                res.status(200).json(ints)
+            })
+            .catch(err => {
+                res.status(500).json({ message: "Could not complete task" });
+            })
+    } else {
+        res.status(404).json({ message: 'There are no interests here' });
+    }
+});
+
+router.get('/:user_id/interests/:id', (req, res) => {
+    const { user_id, id } = req.params;
+    if ( user_id ) {
+        Interests.findById(id)
+            .then(int => {
+                res.status(200).json(int)
             })
             .catch(err => {
                 res.status(500).json({ message: "Could not complete task" });
