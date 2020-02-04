@@ -36,10 +36,9 @@ router.post('/:user_id/interests', (req, res) => {
 })
 
 router.put('/:user_id/interests/:id', (req, res) => {
-    const { id } = req.params;
-    const { topic } = req.body;
+    const { user_id, id } = req.params;
     if (id) {
-        Interests.update(id, req.body)
+        Interests.update(user_id, id, req.body)
             .then(updated => {
                 res.status(200).json(updated);
             })
@@ -54,7 +53,7 @@ router.put('/:user_id/interests/:id', (req, res) => {
 router.delete('/:user_id/interests/:id', (req, res) => {
     const { user_id, id } = req.params;
     if (user_id && id) {
-        Interests.remove(id, user_id)
+        Interests.remove(id)
             .then(deleted => {
                 res.status(200).json({ message: 'skill successfully deleted' });
             })

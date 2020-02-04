@@ -31,12 +31,12 @@ function findById(id) {
 }
 
 // MARK: -- Update
-async function update(id, interest) {
+async function update(user_id, id, interest) {
 	return await db('interests')
 		.where('id', id)
 		.update({
 			"topic": interest.topic, 
-			"user_id": id 
+			"user_id": user_id 
 		})
 		.then(() => {
 			return db('interests').where('id', id).first();
@@ -45,6 +45,6 @@ async function update(id, interest) {
 }
 
 // MARK: -- Delete (look back to later)
-async function remove(user_id, id) {
+async function remove(id) {
 	return await db('interests').where('id', id).del()
 }
