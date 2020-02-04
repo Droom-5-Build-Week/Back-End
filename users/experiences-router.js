@@ -70,13 +70,13 @@ router.delete('/:user_id/experiences/:id', (req, res) => {
     if (user_id && id) {
         Experiences.remove(id, user_id)
             .then(deleted => {
-                res.status(200).json({ message: 'skill successfully deleted' });
+                res.status(200).json({ message: 'experience successfully deleted' });
             })
             .catch(err => {
                 res.status(500).json(err);
             })
     } else {
-        res.status(400).json({ message: "There are no experiences here" })
+        res.status(404).json({ message: "There are no experiences here" })
     }
 })
 

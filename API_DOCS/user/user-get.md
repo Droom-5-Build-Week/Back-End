@@ -1,14 +1,14 @@
-## Get Users
+## Read All Users
 
 **Auth required** : YES
 
-* [Show Users] : `GET /api/users/`
+* [GET All Users] : `GET /api/users/`
 
 # Success Response
 
 **Code** : `201 CREATED`
 
-You will a lot of users
+You will get a lot of users
 
 ```json
 {
@@ -29,7 +29,7 @@ You will a lot of users
 
 **Auth required** : YES
 
-* [Show A User] : `GET /api/users/:id`
+* [GET A User] : `GET /api/users/:id`
 
 ## Success Response
 

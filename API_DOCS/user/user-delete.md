@@ -2,7 +2,7 @@
 
 **Auth required** : YES
 
-* [Delete Users] : `DELETE /api/users/:id`
+* [DELETE Users] : `DELETE /api/users/:id`
 
 # Success Response
 

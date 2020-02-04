@@ -1,4 +1,4 @@
-## Put User
+## Update User
 
 **Auth required** : YES
 
