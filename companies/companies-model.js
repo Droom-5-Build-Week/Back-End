@@ -3,6 +3,7 @@ const db = require('../database/db-config.js');
 module.exports = {
 	add,
 	find,
+	findBy
 	findById,
 	update,
 	remove,
@@ -17,6 +18,10 @@ async function add(company) {
 
 function find() {
 	return db('companies').select('id', 'email', 'name');
+}
+
+function findBy(filter) {
+	return db('companies').where({ filter });
 }
 
 function findById(id) {
