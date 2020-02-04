@@ -33,11 +33,11 @@ router.get('/:company_id/jobs/:job_id/skills/:skill_id', (req, res) => {
     }
 });
 
-router.post('/jobs/:id/skill', (req, res) => {
+router.post('/:company_id/jobs/:job_id/skills', (req, res) => {
     const body = req.body;
-    const { id } = req.params;
+    const { job_id } = req.params;
     if (body) {
-        JobSkills.add(id, body)
+        JobSkills.add(job_id, body)
             .then(skill => {
                 res.status(201).json(skill)
             })
@@ -50,7 +50,7 @@ router.post('/jobs/:id/skill', (req, res) => {
     }
 })
 
-router.put('/:company_id/jobs/:id/skills/:skill_id', (req, res) => {
+router.put('/:company_id/jobs/:job_id/skills/:skill_id', (req, res) => {
     const { skill_id } = req.params;
     const body = req.body;
     if (skill_id) {

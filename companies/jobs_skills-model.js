@@ -7,11 +7,6 @@ module.exports = {
     remove
 };
 
-// tbl.string('position_name').notNullable();
-// 			tbl.string('type').notNullable();
-// 			tbl.string('job_bio').notNullable();
-// 			tbl.string('duration').notNullable();
-// 			tbl.integer('company_id')
 // MARK: -- Add Skill to hunter
 async function add(id, jobSkill) {
     //let user_id = db('users').where('id', id).select('id').first();
