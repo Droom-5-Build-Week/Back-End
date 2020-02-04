@@ -7,10 +7,8 @@
 * [Fields that can be updated] :  `name`
 
 ```json
-{
-  "id": 2,
+{ 
   "name": "FTP",
-  "job_id": 23
 }
 ```
 

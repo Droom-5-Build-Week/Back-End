@@ -9,7 +9,6 @@
 ```json
 {
   "name": "FTP",
-  "job_id": 23
 }
 ```
 

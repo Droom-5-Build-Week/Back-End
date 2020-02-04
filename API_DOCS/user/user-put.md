@@ -2,7 +2,7 @@
 
 **Auth required** : YES
 
-* [Update Users] : `PUT /api/users/`
+* [Update Users] : `PUT /api/users/:id`
 
 * [Fields that can be updated] :  `email, password, name, location`
 
