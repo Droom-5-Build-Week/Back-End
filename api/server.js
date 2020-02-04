@@ -12,6 +12,8 @@ const companyAuthRouter = require('../auth/company-auth-router.js')
 const jobsRouter = require('../companies/jobs-router.js');
 const jobSkillsRouter = require('../companies/jobs_skills-router.js');
 
+const restricted = require('../auth/restricted-middleware.js');
+
 const server = express();
 
 server.use(helmet());
@@ -28,8 +30,8 @@ function logger(req, res, next) {
 }
 
 server.use('/api/auth', authRouter, companyAuthRouter);
-server.use('/api/users', skillsRouter, experiencesRouter, interestsRouter, usersRouter);
-server.use('/api/companies', companyRouter, jobsRouter, jobSkillsRouter)
+server.use('/api/users', restricted, skillsRouter, experiencesRouter, interestsRouter, usersRouter);
+server.use('/api/companies', restricted, companyRouter, jobsRouter, jobSkillsRouter)
 
 
 server.get('/', (req, res) => {
