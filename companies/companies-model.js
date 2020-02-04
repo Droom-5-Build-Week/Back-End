@@ -5,7 +5,7 @@ module.exports = {
 	findById,
 	update,
 	remove,
-	findUserDetails
+	findCompanyDetails
 };
 
 function find() {
@@ -29,33 +29,22 @@ function remove(id) {
 	return db('companies').where('id', id).del()
 }
 
-function findUserDetails(id) {
-	return db('interests')
-		.where('user_id', id)
-		.select('topic')
-		.then(interests => {
-			return db('experiences as e')
-				.where('e.user_id', id)
-				.select('e.company_name', 'e.job_title')
-				.then(experiences => {
-					return db('skills as s')
-						.where('s.user_id', id)
-						.select('s.skill_name')
-						.then(skills => {
-
-							return db('users')
-								.where('id', id)
-								.select('email', 'name', 'location')
-								.first()
-								.then(user => {
-									return {
-										...user,
-										experiences,
-										interests,
-									}
-								})
-
-						})
+function findCompanyDetails(id) {
+	return db('jobs')
+		.where('company_id', id)
+		.select('position_name', 'type', 'duration', 'job_bio')
+		.then(jobs => {
+			return db('companies as c')
+				.where('c.id', id)
+				.select('c.name', 'c.location', 'c.email')
+				.first()
+				.then(company => {
+					console.log(company)
+					return {
+						...company,
+						jobs
+					}
+					
 				})
 		})
 }

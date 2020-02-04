@@ -35,23 +35,10 @@ exports.up = function (knex) {
 				.onDelete('CASCADE')
 				.onUpdate('CASCADE');
 		})
-
-		.createTable('preferred_skills', tbl => {
-			tbl.increments();
-			tbl.string('name').notNullable();
-			tbl.integer('job_id')
-				.unsigned()
-				.notNullable()
-				.references('id')
-				.inTable('jobs')
-				.onDelete('CASCADE')
-				.onUpdate('CASCADE');
-		})
 };
 
 exports.down = function (knex) {
-	knex.schema
-		.dropTableIfExists('preferred_skills')
+	return knex.schema
 		.dropTableIfExists('job_skills')
 		.dropTableIfExists('job')
 		.dropTableIfExists('companies');
