@@ -59,7 +59,7 @@ router.post('/:company_id/jobs', (req, res) => {
             })
             .catch(err => {
                 console.log(err);
-                res.status(500).json(err)
+                res.status(500).json({ message: "Error posting jobs" })
             })
     } else {
         res.status(400).json({ message: "Please fill in all required fields" })
@@ -75,10 +75,10 @@ router.put('/:company_id/jobs/:id', (req, res) => {
                 res.status(200).json(updated);
             })
             .catch(err => {
-                res.status(500).json(err);
+                res.status(500).json({ message: "Error updating job" });
             })
     } else {
-        res.status(400).json({ message: "Please fill in all required fields" })
+        res.status(400).json({ message: "Please fill all required fields" })
     }
 })
 
@@ -90,7 +90,7 @@ router.delete('/:company_id/jobs/:id', (req, res) => {
                 res.status(200).json({ message: 'job successfully deleted' });
             })
             .catch(err => {
-                res.status(500).json(err);
+                res.status(500).json({ message: "Error deleting job" });
             })
     } else {
         res.status(400).json({ message: "There is no job here" })
