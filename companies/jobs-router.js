@@ -11,6 +11,7 @@ router.get('/:company_id/jobs', (req, res) => {
                 res.status(200).json(jobs)
             })
             .catch(err => {
+                console.log(err);
                 res.status(500).json({ message: "Could not complete task" });
             })
     } else {

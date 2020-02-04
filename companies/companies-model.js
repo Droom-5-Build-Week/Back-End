@@ -32,19 +32,17 @@ function remove(id) {
 function findCompanyDetails(id) {
 	return db('jobs')
 		.where('company_id', id)
-		.select('position_name', 'type', 'duration', 'job_bio')
+		.select('position_name', 'type', 'duration', 'job_bio', 'jobs.id')
 		.then(jobs => {
 			return db('companies as c')
 				.where('c.id', id)
 				.select('c.name', 'c.location', 'c.email')
 				.first()
 				.then(company => {
-					console.log(company)
 					return {
 						...company,
 						jobs
-					}
-					
+					}					
 				})
 		})
 }
