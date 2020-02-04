@@ -19,9 +19,9 @@ router.get('/:user_id/experiences', (req, res) => {
 });
 
 router.post('/:user_id/experiences', (req, res) => {
+    const { user_id } = req.params
     const { company_name, job_title } = req.body;
     if (company_name && job_title) {
-
         Experiences.add(user_id, req.body)
             .then(exp => {
                 res.status(201).json(exp)

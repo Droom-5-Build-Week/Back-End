@@ -41,59 +41,38 @@ function remove(id) {
 	return db('users').where('id', id).del()
 }
 
-function findUserDetails(id) {
-	return db('interests')
-		.where('user_id', id)
-		.select('topic')
-		.then(interests => {
-			return db('experiences as e')
-				.where('e.user_id', id)
-				.join('interests', 'interests.user_id', 'e.user_id')
-				.select('e.company_name', 'e.job_title')
-				.then(experiences => {
-					return db('skills as s')
-						.where('s.user_id', id)
-						.join('experiences', 'experiences.user_id', 's.user_id')
-						.select('s.skill_name')
-						.then(skills => {
-							return db('users')
-								.where('id', id)
-								.select('email', 'name', 'location')
-								.first()
-								.then(user => {
-									return {
-										...user,
-										interests,
-										skills,
-										experiences,
-									}
-								})
 
+function findUserDetails(id) {
+	return db('users')
+		.where('id', id)
+		.select('name', 'email', 'location')
+		.first()
+		.then(users => {
+			return db('interests')
+				.where('interests.user_id', id)
+				.select('interests.topic')
+				.then(interests => {
+					return db('skills')
+						.where('skills.user_id', id)
+						.select('skill_name')
+						.then(skills => {
+							return db('experiences')
+								.where('experiences.user_id', id)
+								.select('job_title', 'company_name')
+								.then(experiences => {
+
+									const sk = skills.flatMap(object => Object.values(object))
+									const int = interests.flatMap(object => Object.values(object))
+
+									return {
+										...users,
+										skills: sk,
+										interests: int,
+										experiences
+									}
+
+								})
 						})
 				})
 		})
 }
-
-// function getProjectById(id) {
-// 	return db('tasks')
-// 		.where('project_id', id)
-// 		.select('id', 'description', 'notes', 'completed')
-// 		.then(tasks => {
-// 			return db('resources-projects as rp')
-// 				.where('project_id', id)
-// 				.join('resources as r', 'rp.resource_id', 'r.id')
-// 				.select('r.id', 'r.name', 'r.description')
-// 				.then(resources => {
-// 					return db('projects')
-// 						.where('id', id)
-// 						.first()
-// 						.then(project => {
-// 							return {
-// 								...project,
-// 								tasks,
-// 								resources
-// 							}
-// 						})
-// 				})
-// 		})
-// }
