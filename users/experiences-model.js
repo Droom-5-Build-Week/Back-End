@@ -32,13 +32,13 @@ function findById(id) {
 }
 
 // MARK: -- Update
-async function update(id, experience) {
+async function update(user_id, id, experience) {
 	return await db('experiences')
 		.where('id', id)
 		.update({
 			"company_name": experience.company_name, 
 			"job_title": experience.job_title, 
-			"user_id": id 
+			"user_id": user_id 
 		})
 		.then(() => {
 			return db('experiences').where('id', id).first();

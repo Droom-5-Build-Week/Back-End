@@ -20,7 +20,6 @@ router.get('/:user_id/experiences', (req, res) => {
 
 router.post('/:user_id/experiences', (req, res) => {
     const { company_name, job_title } = req.body;
-    const user_id = req.params.user_id;
     if (company_name && job_title) {
 
         Experiences.add(user_id, req.body)
@@ -37,10 +36,9 @@ router.post('/:user_id/experiences', (req, res) => {
 })
 
 router.put('/:user_id/experiences/:id', (req, res) => {
-    const { id } = req.params;
-    const { company_name, job_title } = req.body;
+    const { user_id, id } = req.params;
     if (id) {
-        Experiences.update(id, req.body)
+        Experiences.update(user_id, id, req.body)
             .then(updated => {
                 res.status(200).json(updated);
             })

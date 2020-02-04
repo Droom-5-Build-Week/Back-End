@@ -23,10 +23,10 @@ function findById(id) {
 	return db('skills').where('id', id).first();
 }
 // MARK: -- Update
-async function update(id, skill) {
+async function update(user_id, id, skill) {
 	return await db('skills')
 		.where('id', id)
-		.update({ "skill_name": skill })
+		.update({ "skill_name": skill, "user_id": user_id })
 		.then(() => {
 			return db('skills').where('id', id).first();
 		})

@@ -36,10 +36,10 @@ router.post('/:user_id/skills', (req, res) => {
 })
 
 router.put('/:user_id/skills/:id', (req, res) => {
-    const { id } = req.params;
+    const { user_id, id } = req.params;
     const { skill_name } = req.body;
     if (id) {
-        Skills.update(id, skill_name)
+        Skills.update(user_id, id, skill_name)
             .then(updated => {
                 res.status(200).json(updated);
             })
