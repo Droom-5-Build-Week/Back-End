@@ -35,6 +35,7 @@ exports.up = function (knex) {
 				.onDelete('CASCADE')
 				.onUpdate('CASCADE');
 		})
+
 };
 
 exports.down = function (knex) {
