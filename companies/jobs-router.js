@@ -12,7 +12,7 @@ router.get('/:company_id/jobs', (req, res) => {
             })
             .catch(err => {
                 console.log(err);
-                res.status(500).json({ message: "Could not complete task" });
+                res.status(500).json({ message: "Could not find jobs" });
             })
     } else {
         res.status(404).json({ message: 'There are no jobs here' });
@@ -27,7 +27,7 @@ router.get('/:company_id/jobs/:id', (req, res) => {
                 res.status(200).json(job)
             })
             .catch(err => {
-                res.status(500).json({ message: "Could not complete task" });
+                res.status(500).json({ message: "Could not find jobs" });
             })
     } else {
         res.status(404).json({ message: 'There is no job here' });
@@ -42,7 +42,7 @@ router.get('/jobs/:type', (req, res) => {
                 res.status(200).json(jobs)
             })
             .catch(err => {
-                res.status(500).json({ message: "Could not complete task" });
+                res.status(500).json({ message: "Could not find jobs" });
             })
     } else {
         res.status(404).json({ message: 'There are no jobs here' });
