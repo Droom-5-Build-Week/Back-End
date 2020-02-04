@@ -2,7 +2,7 @@
 
 **Auth required** : YES
 
-* [Show Job Skills] : `GET /api/companies/jobs/:type`
+* [Show Job Type] : `GET /api/companies/jobs/:type`
 
 # Success Response
 
