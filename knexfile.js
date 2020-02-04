@@ -36,7 +36,7 @@ module.exports = {
   production: {
     client: 'sqlite3',
     connection: {
-      filename: 'process.env.DB_ENV',
+      filename: 'process.env.dev.bd3',
     },
     pool: {
       afterCreate: (conn, done) => {
