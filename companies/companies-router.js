@@ -21,7 +21,7 @@ router.get('/:id', (req, res) => {
 		})
 		.catch(err => {
 			console.log(err)
-			res.status(500).json({ message: 'could not find user' })
+			res.status(500).json({ message: 'could not find company' })
 		})
 })
 
@@ -30,15 +30,15 @@ router.put('/:id', (req, res) => {
 	const changes = req.body;
 	if (id && changes) {
 		Comp.update(id, changes)
-			.then(user => {
-				res.status(201).json(user);
+			.then(company => {
+				res.status(201).json(company);
 			})
 			.catch(err => {
 				console.log(err);
-				res.status(500).json({ message: 'Could not update user' });
+				res.status(500).json({ message: 'Could not update company' });
 			})
 	} else {
-		res.status(400).json({ message: 'Nothing was update for the user' });
+		res.status(400).json({ message: 'Nothing was update for the company' });
 	}
 })
 
@@ -47,13 +47,13 @@ router.delete('/:id', (req, res) => {
 	Comp.remove(id)
 		.then(removed => {
 			if (removed) {
-				res.status(200).json({ message: 'User successfully deleted' });
+				res.status(200).json({ message: 'Company successfully deleted' });
 			} else {
-				res.status(404).json({ message: 'Could not find user' });
+				res.status(404).json({ message: 'Could not find company' });
 			}
 		})
 		.catch(err => {
-			res.status(500).json({ message: 'Could not delete user' })
+			res.status(500).json({ message: 'Could not delete company' })
 		})
 })
 

@@ -10,6 +10,7 @@ const interestsRouter = require('../users/interests-router.js');
 const companyRouter = require('../companies/companies-router.js');
 const companyAuthRouter = require('../auth/company-auth-router.js')
 const jobsRouter = require('../companies/jobs-router.js');
+const jobSkillsRouter = require('../companies/jobs_skills-router.js');
 
 const server = express();
 
@@ -28,7 +29,7 @@ function logger(req, res, next) {
 
 server.use('/api/auth', authRouter, companyAuthRouter);
 server.use('/api/users', skillsRouter, experiencesRouter, interestsRouter, usersRouter);
-server.use('/api/companies', companyRouter, jobsRouter)
+server.use('/api/companies', companyRouter, jobsRouter, jobSkillsRouter)
 
 
 server.get('/', (req, res) => {

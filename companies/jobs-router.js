@@ -33,6 +33,21 @@ router.get('/:company_id/jobs/:id', (req, res) => {
     }
 });
 
+router.get('/jobs/:type', (req, res) => {
+    const { type } = req.params;
+    if (type) {
+        Jobs.findByType(type)
+            .then(jobs => {
+                res.status(200).json(jobs)
+            })
+            .catch(err => {
+                res.status(500).json({ message: "Could not complete task" });
+            })
+    } else {
+        res.status(404).json({ message: 'There are no jobs here' });
+    }
+});
+
 router.post('/:company_id/jobs', (req, res) => {
     const body = req.body;
     const company_id = req.params.company_id;
