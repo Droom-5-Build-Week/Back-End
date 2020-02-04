@@ -1,12 +1,19 @@
 const db = require('../database/db-config.js');
 
 module.exports = {
+	add,
 	find,
 	findById,
 	update,
 	remove,
 	findCompanyDetails
 };
+
+async function add(company) {
+	const [id] = await db('companies').insert(company);
+	return findById(id);
+}
+
 
 function find() {
 	return db('companies').select('id', 'email', 'name');
