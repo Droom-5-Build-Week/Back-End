@@ -4,7 +4,8 @@ module.exports = {
     find,
     findById,
     update,
-    remove
+    remove,
+    findByType
 };
 
 // tbl.string('position_name').notNullable();
@@ -28,6 +29,12 @@ function find(companyId) {
 function findById(id) {
     return db('jobs').where('id', id).first();
 }
+
+// MARK: -- Find by type
+function findByType(type) {
+    return db('jobs').where('type', type);
+}
+
 // MARK: -- Update
 async function update(id, job) {
     return await db('jobs')
