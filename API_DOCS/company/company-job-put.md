@@ -8,12 +8,10 @@
 
 ```json
 {
-    "id": 8,
     "position_name": "Human Directives Developer",
     "type": "Technician",
     "job_bio": "Eveniet omnis iure dolor. Laboriosam quia ut dolorem suscipit quod. Molestiae consequuntur animi provident consequatur repellendus est vitae.",
     "duration": "long-term",
-    "company_id": 9
 }
 ```
 
