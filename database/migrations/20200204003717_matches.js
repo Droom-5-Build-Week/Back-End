@@ -22,7 +22,7 @@ exports.up = function(knex) {
 		tbl.boolean('user_match').defaultTo(false);
 		tbl.boolean('job_match').defaultTo(false);
 		tbl.boolean('matched').defaultTo(false);
-};
+})};
 
 exports.down = function(knex) {
 	return knex.schema.dropTableIfExists('matches');
