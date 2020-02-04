@@ -83,5 +83,3 @@ typings/
 .dynamodb/
 
 dev.db3
-
-.env
