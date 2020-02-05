@@ -4,7 +4,7 @@
 
 * [Post Job] : `POST /api/companies/:company_id/jobs`
 
-* [Fields required] :  `position_name, type, job_bio, duration, company_id`
+* [Fields required] :  `position_name, type, job_bio, duration, skills`
 
 ```json
 {
@@ -12,7 +12,7 @@
     "type": "Technician",
     "job_bio": "Eveniet omnis iure dolor. Laboriosam quia ut dolorem suscipit quod. Molestiae consequuntur animi provident consequatur repellendus est vitae.",
     "duration": "long-term",
-    "skills": "string, with commans, so you can manipulate it"
+    "skills": "This, that, and that too"
 }
 ```
 
@@ -27,8 +27,9 @@
     "type": "Technician",
     "job_bio": "Eveniet omnis iure dolor. Laboriosam quia ut dolorem suscipit quod. Molestiae consequuntur animi provident consequatur repellendus est vitae.",
     "duration": "long-term",
+    "skills": "This, that, and that too"
     "company_id": 9
-}
+  }
 ```
 
 # Error Response
