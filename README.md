@@ -15,7 +15,9 @@
 	"email": "bigby@example.com",
 	"password": "yourpasswordhere",
 	"name": "your-full-name",
-	"location": "City-or-town"
+	"location": "City-or-town",
+	"personal_skills": "Javascript, HTML, CSS",
+	"personal_interests": "Programming"
 }
 ```
 # Success Response
@@ -168,22 +170,6 @@ has permissions to access.
 * [Update A Experience for user](API_DOCS/user/user-experience-put.md) : `PUT /api/users/:user_id/experiences/:id`
 * [Delete An Experience](API_DOCS/user/user-experience-delete.md) : `DELETE /api/users/:user_id/experiences/:id`
 
-### Interest in User
-
-* [Create Interest for user](API_DOCS/user/user-interest-post.md) : `POST /api/users/:user_id/interests`
-* [Show All Interests for user](API_DOCS/user/user-interest-get.md) : `GET /api/users/:user_id/interests`
-* [Show A Interest for user](API_DOCS/user/user-interest-get.md) : `GET /api/users/:user_id/interests/:id`
-* [Update A Interest for user](API_DOCS/user/user-interest-put.md) : `PUT /api/users/:user_id/interests/:id`
-* [Delete An Interest](API_DOCS/user/user-interest-delete.md) : `DELETE /api/users/:user_id/interests/:id`
-
-### Skills in User
-
-* [Create Skill for user](API_DOCS/user/user-skill-post.md) : `POST /api/users/:user_id/skills`
-* [Show All Skills for user](API_DOCS/user/user-skill-get.md) : `GET /api/users/:user_id/skills`
-* [Show A Skill for user](API_DOCS/user/user-skill-get.md) : `GET /api/users/:user_id/skills/:id`
-* [Update A Skill for user](API_DOCS/user/user-skill-put.md) : `PUT /api/users/:user_id/skills/:id`
-* [Delete An Skill](API_DOCS/user/user-skill-delete.md) : `DELETE /api/users/:user_id/skills/:id`
-
 ### Company Account related
 
 Endpoints for viewing and manipulating the Accounts that the Authenticated Companies
@@ -202,11 +188,3 @@ has permissions to access.
 * [Update A Job for company](API_DOCS/company/company-job-put.md) : `PUT /api/companies/:company_id/jobs/:id`
 * [Delete A Job](API_DOCS/company/company-job-delete.md) : `DELETE /api/companies/:company_id/jobs/:id`
 * [Show All Jobs with Type](API_DOCS/company/job-type-get.md) : `GET /api/jobs/:type`
-
-### Jobs Skill in Companies
-
-* [Create Job Skill for a Job](API_DOCS/company/company-job-skill-post.md) : `POST /api/companies/:company_id/jobs/:job_id/skills`
-* [Show All Skills for Job](API_DOCS/company/company-job-skill-get.md) : `GET /api/companies/:company_id/jobs/:job_id/skills`
-* [Show A Skill for a Job](API_DOCS/company/company-job-skill-get.md) : `GET /api/:company_id/jobs/:job_id/skills/:skill_id`
-* [Update A Skill for a Job](API_DOCS/company/company-job-skill-put.md) : `PUT /api/:company_id/jobs/:job_id/skills/:skill_id`
-* [Delete A Skill for a Job](API_DOCS/company/company-job-skill-delete.md) : `DELETE /api/:company_id/jobs/:job_id/skills/:skill_id`
