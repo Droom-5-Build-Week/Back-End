@@ -9,7 +9,7 @@ module.exports = {
 	remove,
 	findUserDetails
 };
-/// comment
+
 async function find() {
 	const id = db('users').select('id').orderBy('id')
 	const arrId = id.map(id => { return id.id });
@@ -47,34 +47,18 @@ function remove(id) {
 function findUserDetails(id) {
 	return db('users')
 		.where('id', id)
-		.select('id', 'name', 'email', 'location')
+		.select('id', 'name', 'email', 'location', 'personal_skills', 'personal_interests')
 		.first()
 		.then(users => {
-			return db('interests')
-				.where('interests.user_id', id)
-				.select('interests.topic')
-				.then(interests => {
-					return db('skills')
-						.where('skills.user_id', id)
-						.select('skill_name')
-						.then(skills => {
-							return db('experiences')
-								.where('experiences.user_id', id)
-								.select('job_title', 'company_name')
-								.then(experiences => {
+			return db('experiences')
+				.where('experiences.user_id', id)
+				.select('job_title', 'company_name')
+				.then(experiences => {
+					return {
+						...users,
+						experiences
+					}
 
-									const sk = skills.flatMap(object => Object.values(object))
-									const int = interests.flatMap(object => Object.values(object))
-
-									return {
-										...users,
-										skills: sk,
-										interests: int,
-										experiences
-									}
-
-								})
-						})
 				})
 		})
 }

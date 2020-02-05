@@ -13,56 +13,35 @@ You will get a lot of users
 ```json
 [
     {
-        "id": 2,
-        "name": "Geovanny Simonis IV",
-        "email": "Judd81@gmail.com",
-        "location": "South Alhaven",
-        "skills": [
-            "SMTP"
-        ],
-        "interests": [
-            "haptic",
-            "auxiliary"
-        ],
-        "experiences": [
-            {
-                "job_title": "Strategist",
-                "company_name": "Osinski, Towne and Emmerich"
-            },
-            {
-                "job_title": "Supervisor",
-                "company_name": "Hauck - Brekke"
-            }
-        ]
-    },
-    {
-        "id": 3,
-        "name": "Torrance Pouros",
-        "email": "Noe_Wilderman15@gmail.com",
-        "location": "Stoltenbergberg",
-        "skills": [
-            "IB",
-            "SDD"
-        ],
-        "interests": [
-            "redundant",
-            "cross-platform"
-        ],
-        "experiences": [
-            {
-                "job_title": "Coordinator",
-                "company_name": "Glover, Fadel and Jaskolski"
-            },
-            {
-                "job_title": "Planner",
-                "company_name": "Konopelski - O'Reilly"
-            },
-            {
-                "job_title": "Architect",
-                "company_name": "Spinka LLC"
-            }
-        ]
-    }
+    "id": 1,
+    "name": "Mr. Billy Mills",
+    "email": "Krista.Pagac@hotmail.com",
+    "location": "North Emmyshire",
+    "personal_skills": "cross-platform",
+    "personal_interests": "USB",
+    "experiences": [
+      {
+        "job_title": "Technician",
+        "company_name": "Dare and Sons"
+      },
+      {
+        "job_title": "Orchestrator",
+        "company_name": "Willms - Donnelly"
+      },
+      {
+        "job_title": "Developer",
+        "company_name": "Pacocha, Rodriguez and Littel"
+      },
+      {
+        "job_title": "Manager",
+        "company_name": "Runte - Yost"
+      },
+      {
+        "job_title": "Developer",
+        "company_name": "Weimann - Welch"
+      }
+  }
+  ...
 ]
 ```
 
@@ -85,27 +64,34 @@ You will get a lot of users
 
 ```json
 {
-    "name": "Ruthie Farrell",
-    "email": "Shannon_Dickens80@yahoo.com",
-    "location": "Rathshire",
-    "skills": [
-        "RAM"
-    ],
-    "interests": [
-        "multi-byte",
-        "solid state"
-    ],
+    "id": 1,
+    "name": "Mr. Billy Mills",
+    "email": "Krista.Pagac@hotmail.com",
+    "location": "North Emmyshire",
+    "personal_skills": "cross-platform",
+    "personal_interests": "USB",
     "experiences": [
-        {
-            "job_title": "Director",
-            "company_name": "Dietrich - Yundt"
-        },
-        {
-            "job_title": "Supervisor",
-            "company_name": "Roberts and Sons"
-        }
-    ]
-}
+      {
+        "job_title": "Technician",
+        "company_name": "Dare and Sons"
+      },
+      {
+        "job_title": "Orchestrator",
+        "company_name": "Willms - Donnelly"
+      },
+      {
+        "job_title": "Developer",
+        "company_name": "Pacocha, Rodriguez and Littel"
+      },
+      {
+        "job_title": "Manager",
+        "company_name": "Runte - Yost"
+      },
+      {
+        "job_title": "Developer",
+        "company_name": "Weimann - Welch"
+      }
+  }
 ```
 
 
