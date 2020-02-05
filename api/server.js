@@ -4,13 +4,10 @@ const cors = require('cors');
 
 const authRouter = require('../auth/auth-router.js');
 const usersRouter = require('../users/users-router.js');
-const skillsRouter = require('../users/skills-router.js');
 const experiencesRouter = require('../users/experiences-router.js');
-const interestsRouter = require('../users/interests-router.js');
 const companyRouter = require('../companies/companies-router.js');
 const companyAuthRouter = require('../auth/company-auth-router.js')
 const jobsRouter = require('../companies/jobs-router.js');
-const jobSkillsRouter = require('../companies/jobs_skills-router.js');
 
 const restricted = require('../auth/restricted-middleware.js');
 
@@ -34,8 +31,8 @@ function logger(req, res, next) {
 }
 
 server.use('/api/auth', authRouter, companyAuthRouter);
-server.use('/api/users', restricted, skillsRouter, experiencesRouter, interestsRouter, usersRouter);
-server.use('/api/companies', restricted, companyRouter, jobsRouter, jobSkillsRouter)
+server.use('/api/users', restricted, experiencesRouter, usersRouter);
+server.use('/api/companies', restricted, companyRouter, jobsRouter)
 
 
 server.get('/', (req, res) => {

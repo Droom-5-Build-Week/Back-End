@@ -20,7 +20,7 @@ async function add(id, job) {
 // MARK: -- Find all skills for hunter
 function find(companyId) {
     return db('jobs').where('company_id', companyId)
-    .select('position_name', 'type', 'job_bio', 'duration', 'id');
+    .select('id', 'position_name', 'type', 'job_bio', 'duration', 'skills')
 }
 
 // MARK: -- Find by id
@@ -37,7 +37,7 @@ function findByType(type) {
 async function update(id, job) {
     return await db('jobs')
         .where('id', id)
-        .update({ "position_name": job.position_name, "type": job.type, "job_bio": job.job_bio, "duration": job.duration, "company_id": job.company_id })
+        .update({ "position_name": job.position_name, "type": job.type, "job_bio": job.job_bio, "duration": job.duration, "skills": job.skills, "company_id": job.company_id })
         .then(() => {
             return db('jobs').where('id', id).first();
         })

@@ -4,7 +4,7 @@ const createFakerCompanyAccount = () => ({
   email: faker.internet.exampleEmail(),
   password: faker.company.catchPhraseAdjective(),
   name: faker.company.companyName(),
-  location: faker.address.city()
+  location: faker.address.city(),
 });
 
 exports.seed = function(knex) {
