@@ -6,7 +6,7 @@ const random_id = () => {
 
 const random_type = () => {
   let i = Math.floor((Math.random() * 3))
-  const arr = ['long-term', 'short-term', 'contract']
+  const arr = ['Full-Time', 'Part-Time', 'Contract']
   return arr[i];
 }
 
