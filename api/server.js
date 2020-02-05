@@ -30,7 +30,6 @@ function logger(req, res, next) {
 	console.log(`DATE: ${date.toDateString()}, ${date.toTimeString()}`);
 	next();
 }
-
 server.use('/api/auth', authRouter, companyAuthRouter);
 server.use('/api/users', restricted, experiencesRouter, usersRouter, matchesRouter);
 server.use('/api/companies', restricted, companyRouter, jobsRouter)
