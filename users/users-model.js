@@ -9,7 +9,7 @@ module.exports = {
 	remove,
 	findUserDetails
 };
-
+/// comment
 async function find() {
 	const id = db('users').select('id').orderBy('id')
 	const arrId = id.map(id => { return id.id });

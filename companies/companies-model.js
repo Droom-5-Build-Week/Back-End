@@ -56,7 +56,7 @@ function findCompanyDetails(id) {
 					return {
 						...company,
 						jobs
-					}					
+					}
 				})
 		})
 }
