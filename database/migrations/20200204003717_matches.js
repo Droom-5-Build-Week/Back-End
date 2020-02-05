@@ -46,3 +46,5 @@ exports.down = function (knex) {
 		.dropTableIfExists('user-interested-in-job')
 		.dropTableIfExists('user-likes-job');
 };
+
+

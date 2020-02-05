@@ -9,6 +9,7 @@ const companyRouter = require('../companies/companies-router.js');
 const companyAuthRouter = require('../auth/company-auth-router.js')
 const jobsRouter = require('../companies/jobs-router.js');
 const matchesRouter = require('../matches/matches-router.js');
+const companyMatchesRouter = require('../matches/company-matches-router.js');
 
 const restricted = require('../auth/restricted-middleware.js');
 
@@ -32,7 +33,7 @@ function logger(req, res, next) {
 }
 server.use('/api/auth', authRouter, companyAuthRouter);
 server.use('/api/users', restricted, experiencesRouter, usersRouter, matchesRouter);
-server.use('/api/companies', restricted, companyRouter, jobsRouter)
+server.use('/api/companies', restricted, companyRouter, jobsRouter, companyMatchesRouter)
 
 
 
