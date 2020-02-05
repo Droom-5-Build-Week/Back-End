@@ -4,35 +4,20 @@ const Companies = require('../companies/companies-model');
 const Users = require('../users/users-model');
 
 module.exports = {
-	userMatches,
-	companyMatches,
-	userMatch,
-	jobMatch
+	getUserLikes,
+	getUserLikesById
 };
 
-async function userMatches(id) {
-	let user = await User.findById(id);
-	let jobs = await Jobs.find();
-
-	let matches = await db('matches').where({ user_id: user.id, matched: true })
-
-	let mappedMatches = matches.map(match => match.job_id);
-
-	let filteredJobs = jobs.filter(job => {
-		return !mappedMatches.includes(job.id);
-	});
-
-	return filteredJobs;
+async function getUserLikes(id) {
+	return db("user-likes-job as ulj").where("ulj.user_id", id)
+		.join("jobs as j", "j.id", "ulj.job_id")
+		.join("companies as c", "c.id", "j.company_id")
+		.select("c.name", "j.position_name", "j.type", "j.job_bio", "j.skills")
 }
 
-async function companyMatches(id) {
-	let company = await Companies.findById(id);
-	let users = await Users.find();
-
-	let matches = await db('matches').where({ matched: true })
-
-	for (let i = 0 ; i < matches.length ; i++) {
-		let unmatched = [];
-	}
-
+async function getUserLikesById(id) {
+	return db("user-likes-job as ulj").where("ulj.id", id)
+		.join("jobs as j", "j.id", "ulj.job_id")
+		.join("companies as c", "c.id", "j.company_id")
+		.select("c.name", "j.position_name", "j.type", "j.job_bio", "j.skills")
 }

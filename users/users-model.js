@@ -26,7 +26,7 @@ async function add(user) {
 }
 
 function findById(id) {
-	return db('users').where('id', id).first();
+	return db('users').where('id', id).select("id", "name", "location").first();
 }
 
 function update(id, changes) {

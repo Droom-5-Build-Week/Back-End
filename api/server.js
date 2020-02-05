@@ -8,6 +8,7 @@ const experiencesRouter = require('../users/experiences-router.js');
 const companyRouter = require('../companies/companies-router.js');
 const companyAuthRouter = require('../auth/company-auth-router.js')
 const jobsRouter = require('../companies/jobs-router.js');
+const matchesRouter = require('../matches/matches-router.js');
 
 const restricted = require('../auth/restricted-middleware.js');
 
@@ -15,7 +16,7 @@ const server = express();
 
 server.use(helmet());
 server.use(cors({
-	credentials: true, 
+	credentials: true,
 	origin: "http://localhost:3000"
 }));
 
@@ -31,8 +32,9 @@ function logger(req, res, next) {
 }
 
 server.use('/api/auth', authRouter, companyAuthRouter);
-server.use('/api/users', restricted, experiencesRouter, usersRouter);
+server.use('/api/users', experiencesRouter, usersRouter, matchesRouter);
 server.use('/api/companies', restricted, companyRouter, jobsRouter)
+
 
 
 server.get('/', (req, res) => {
