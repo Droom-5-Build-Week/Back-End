@@ -188,3 +188,10 @@ has permissions to access.
 * [Update A Job for company](API_DOCS/company/company-job-put.md) : `PUT /api/companies/:company_id/jobs/:id`
 * [Delete A Job](API_DOCS/company/company-job-delete.md) : `DELETE /api/companies/:company_id/jobs/:id`
 * [Show All Jobs with Type](API_DOCS/company/job-type-get.md) : `GET /api/jobs/:type`
+
+### Matches
+
+* [Show all company matches](API_DOCS/matches/companies-matches.md) : `GET /api/companies/:company_id/matches`
+* [Create job matches for user](API_DOCS/matches/user-matches-post.md) : `POST /api/users/:user_id/matches`
+* [Show all user matches](API_DOCS/matches/users-matches-get.md) : `GET /api/users/:user_id/matches`
+* [Show user match](API_DOCS/matches/users-matches-get.md) : `GET /api/users/:user_id/matches/:match_id`
