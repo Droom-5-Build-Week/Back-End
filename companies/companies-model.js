@@ -27,7 +27,7 @@ function findBy(filter) {
 }
 
 function findById(id) {
-	return db('companies').where('id', id).select("name", "location").first();
+	return db('companies').where('id', id).select("name", "location", "id").first();
 }
 
 function update(id, changes) {
