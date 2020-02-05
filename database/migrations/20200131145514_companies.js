@@ -3,10 +3,16 @@ exports.up = function (knex) {
 	return knex.schema
 		.createTable('companies', tbl => {
 			tbl.increments();
-			tbl.string('email').unique().notNullable();
-			tbl.string('password').notNullable();
-			tbl.string('name', 150).notNullable();
-			tbl.string('location').notNullable();
+			tbl.string('email')
+				.unique()
+				.notNullable();
+			tbl.string('password')
+				.notNullable();
+			tbl.string('name', 150)
+				.notNullable();
+			tbl.string('location')
+				.notNullable()
+				.defaultTo("unknown");
 		})
 
 		.createTable('jobs', tbl => {
