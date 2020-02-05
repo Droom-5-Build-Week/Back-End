@@ -21,7 +21,7 @@ function find() {
 }
 
 function findBy(filter) {
-	return db('companies').where({ filter });
+	return db('companies').where(filter);
 }
 
 function findById(id) {
@@ -54,7 +54,7 @@ function findCompanyDetails(id) {
 					return {
 						...company,
 						jobs
-					}					
+					}
 				})
 		})
 }
