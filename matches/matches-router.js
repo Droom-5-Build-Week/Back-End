@@ -46,4 +46,36 @@ router.get("/:user_id/matched/:match_id", (req, res) => {
         })
 })
 
+router.post("/:id/matches", (req, res) => {
+    const { id } = req.params;
+    req.body.seen_before = true;
+    const { job_id, user_id, likes, seen_before } = req.body;
+    Users.findById(id)
+        .then(user => {
+            if (!user) {
+                res.staus(404).json({ message: "No such user" })
+            } else {
+                if (job_id && user_id && seen_before) {
+                    if (likes === true) {
+                        Matches.postUserLikes(req.body, id)
+                            .then(like => {
+                                res.status(200).json(like)
+                            })
+                            .catch(err => {
+                                res.status(500).json({ message: "Error posting like for user" })
+                            })
+                    } else {
+                        res.status(200).json({ message: "Didnt like this job" })
+                    }
+                } else {
+                    res.status(500).json({ message: "Please provide all required info" })
+                }
+            }
+        })
+        .catch(err => {
+            console.log(err)
+            res.status(500).json(err)
+        })
+})
+
 module.exports = router;

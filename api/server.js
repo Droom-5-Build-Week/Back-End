@@ -32,7 +32,7 @@ function logger(req, res, next) {
 }
 
 server.use('/api/auth', authRouter, companyAuthRouter);
-server.use('/api/users', experiencesRouter, usersRouter, matchesRouter);
+server.use('/api/users', restricted, experiencesRouter, usersRouter, matchesRouter);
 server.use('/api/companies', restricted, companyRouter, jobsRouter)
 
 

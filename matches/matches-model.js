@@ -5,7 +5,8 @@ const Users = require('../users/users-model');
 
 module.exports = {
 	getUserLikes,
-	getUserLikesById
+	getUserLikesById,
+	postUserLikes
 };
 
 async function getUserLikes(id) {
@@ -20,4 +21,11 @@ async function getUserLikesById(id) {
 		.join("jobs as j", "j.id", "ulj.job_id")
 		.join("companies as c", "c.id", "j.company_id")
 		.select("c.name", "j.position_name", "j.type", "j.job_bio", "j.skills")
+}
+
+async function postUserLikes(data, id) {
+	return db("user-likes-job").insert(data)
+		.then(like => {
+			return getUserLikes(id)
+		})
 }
