@@ -15,6 +15,7 @@ const createFakerJobs = () => ({
   type: random_type(),
   job_bio: faker.lorem.paragraph(),
   duration: "",
+  skills: faker.hacker.adjective(),
   company_id: random_id()
 });
 

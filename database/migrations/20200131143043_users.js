@@ -9,30 +9,8 @@ exports.up = function (knex) {
                 .notNullable()
             tbl.string('location', 150)
                 .notNullable()
-        })
-        .createTable('interests', tbl => {
-            tbl.increments();
-            tbl.string('topic', 100)
-                .notNullable()
-            tbl.integer('user_id')
-                .unsigned()
-                .notNullable()
-                .references('id')
-                .inTable('users')
-                .onDelete('CASCADE')
-                .onUpdate('CASCADE')
-        })
-        .createTable('skills', tbl => {
-            tbl.increments();
-            tbl.string('skill_name', 100)
-                .notNullable()
-            tbl.integer('user_id')
-                .unsigned()
-                .notNullable()
-                .references('id')
-                .inTable('users')
-                .onDelete('CASCADE')
-                .onUpdate('CASCADE')
+            tbl.string('personal_interests').notNullable();
+            tbl.string('personal_skills').notNullable();
         })
         .createTable('experiences', tbl => {
             tbl.increments();
@@ -53,7 +31,5 @@ exports.up = function (knex) {
 exports.down = function (knex) {
     return knex.schema
         .dropTableIfExists('experiences')
-        .dropTableIfExists('skills')
-        .dropTableIfExists('interests')
         .dropTableIfExists('users')
 };

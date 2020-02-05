@@ -43,7 +43,7 @@ function remove(id) {
 	return db('companies').where('id', id).del()
 }
 
-function findCompanyDetails(id) {
+async function findCompanyDetails(id) {
 	return db('jobs')
 		.where('company_id', id)
 		.select('jobs.id', 'position_name', 'type', 'duration', 'job_bio')

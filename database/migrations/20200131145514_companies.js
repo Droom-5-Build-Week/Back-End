@@ -15,6 +15,7 @@ exports.up = function (knex) {
 			tbl.string('type').notNullable();
 			tbl.string('job_bio').notNullable();
 			tbl.string('duration').notNullable();
+			tbl.string('skills').notNullable();
 			tbl.integer('company_id')
 				.unsigned()
 				.notNullable()
@@ -24,23 +25,27 @@ exports.up = function (knex) {
 				.onUpdate('CASCADE');
 		})
 
-		.createTable('job_skills', tbl => {
-			tbl.increments();
-			tbl.string('name').notNullable();
-			tbl.integer('job_id')
-				.unsigned()
-				.notNullable()
-				.references('id')
-				.inTable('jobs')
-				.onDelete('CASCADE')
-				.onUpdate('CASCADE');
-		})
-
 };
 
 exports.down = function (knex) {
 	return knex.schema
-		.dropTableIfExists('job_skills')
 		.dropTableIfExists('job')
 		.dropTableIfExists('companies');
 };
+
+
+// .enum(['Finance',
+// 'Research',
+// 'Accounting',
+// 'Relations',
+// 'Construction',
+// 'Transportation',
+// 'Software Development', 
+// 'Marketing', 
+// 'Sales', 
+// 'Music', 
+// 'Film-Making',   
+// 'Design',
+// 'Admin',
+// 'Wearer of Many Hats'
+// ]).defaultTo('Admin');
