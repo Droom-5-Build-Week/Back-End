@@ -9,9 +9,11 @@ module.exports = {
 	remove,
 	findUserDetails
 };
-
-function find() {
-	return db('users').select('id', 'email');
+/// comment
+async function find() {
+	const id = db('users').select('id').orderBy('id')
+	const arrId = id.map(id => { return id.id });
+	return await arrId.map(id => findUserDetails(id))
 }
 
 function findBy(filter) {
@@ -45,7 +47,7 @@ function remove(id) {
 function findUserDetails(id) {
 	return db('users')
 		.where('id', id)
-		.select('name', 'email', 'location')
+		.select('id', 'name', 'email', 'location')
 		.first()
 		.then(users => {
 			return db('interests')
