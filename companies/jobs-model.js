@@ -5,7 +5,8 @@ module.exports = {
     findById,
     update,
     remove,
-    findByType
+    findByType,
+    findByIdInCompany
 };
 
 
@@ -26,6 +27,10 @@ function find(companyId) {
 // MARK: -- Find by id
 function findById(id) {
     return db('jobs').where('id', id).first();
+}
+
+function findByIdInCompany(job_id, company_id) {
+    return db('jobs').where('jobs.company_id', company_id).where("id", job_id).first();
 }
 
 // MARK: -- Find by type
