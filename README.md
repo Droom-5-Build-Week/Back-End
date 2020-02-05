@@ -205,7 +205,7 @@ has permissions to access.
 
 ### Jobs Skill in Companies
 
-* [Create Job Skill for a Job](API_DOCS/company/company-jobskill-post.md) : `POST /api/companies/:company_id/jobs/:job_id/skills`
+* [Create Job Skill for a Job](API_DOCS/company/company-job-skill-post.md) : `POST /api/companies/:company_id/jobs/:job_id/skills`
 * [Show All Skills for Job](API_DOCS/company/company-job-skill-get.md) : `GET /api/companies/:company_id/jobs/:job_id/skills`
 * [Show A Skill for a Job](API_DOCS/company/company-job-skill-get.md) : `GET /api/:company_id/jobs/:job_id/skills/:skill_id`
 * [Update A Skill for a Job](API_DOCS/company/company-job-skill-put.md) : `PUT /api/:company_id/jobs/:job_id/skills/:skill_id`
