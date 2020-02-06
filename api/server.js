@@ -48,7 +48,7 @@ server.use('/api/companies', restricted, companyRouter, jobsRouter, companyMatch
 
 
 server.get('/', (req, res) => {
-	res.send('up!');
+	res.status(200).json({api: 'up!'});
 });
 
 module.exports = server;
