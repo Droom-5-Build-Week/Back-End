@@ -16,10 +16,20 @@ const restricted = require('../auth/restricted-middleware.js');
 const server = express();
 
 server.use(helmet());
-server.use(cors({
-	credentials: true,
-	origin: "http://localhost:3000"
-}));
+
+
+var whitelist = ['http://localhost:3000', 'https://droom-bw-5.netlify.com']
+var corsOptionsDelegate = function (req, callback) {
+	var corsOptions;
+	if (whitelist.indexOf(req.header('Origin')) !== -1) {
+		corsOptions = { credentials: true, origin: true } // reflect (enable) the requested origin in the CORS response
+	} else {
+		corsOptions = { origin: false } // disable CORS for this request
+	}
+  		callback(null, corsOptions) // callback expects two parameters: error and options
+}
+
+server.use(cors(corsOptionsDelegate));
 
 server.use(express.json());
 server.use(logger);
