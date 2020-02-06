@@ -27,7 +27,7 @@
     "type": "Technician",
     "job_bio": "Eveniet omnis iure dolor. Laboriosam quia ut dolorem suscipit quod. Molestiae consequuntur animi provident consequatur repellendus est vitae.",
     "duration": "long-term",
-    "skills": "This, that, and that too"
+    "skills": "This, that, and that too",
     "company_id": 9
 }
 ```
