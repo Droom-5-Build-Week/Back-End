@@ -14,18 +14,6 @@ describe('company-auth-router', function () {
         })
     })
 
-    // tbl.increments();
-    // 		tbl.string('email')
-    // 			.unique()
-    // 			.notNullable();
-    // 		tbl.string('password')
-    // 			.notNullable();
-    // 		tbl.string('name', 150)
-    // 			.notNullable();
-    // 		tbl.string('location')
-    // 			.notNullable()
-    // 			.defaultTo("unknown");
-
     describe('registration', function () {
 
         it('should return 201 when posting', async function () {
@@ -36,7 +24,7 @@ describe('company-auth-router', function () {
                 })
         })
 
-        it('should return user', async function () {
+        it('should return company', async function () {
             const company = { email: 'bill@microsoft.com', password: 'fortnight', name: 'Microsoft', location: 'France' }
             await request(server).post('/api/auth/company/register').send(company)
                 .then(res => {
@@ -48,11 +36,11 @@ describe('company-auth-router', function () {
     describe('login', function () {
 
         it('should return a token', async function () {
-            const user = { email: 'Katz@utilzexample.com', password: 'fortnight', name: 'Katz Deli', location: 'London' }
-            await request(server).post('/api/auth/register').send(user)
+            const company = { email: 'bill@microsoft.com', password: 'fortnight', name: 'Microsoft', location: 'France' }
+            await request(server).post('/api/auth/company/register').send(company)
                 .then(async res => {
-                    const loginUser = { email: 'Katz@utilzexample.com', password: 'fortnight' }
-                    await request(server).post('/api/auth/login').send(loginUser)
+                    const loginCompany = { email: 'bill@microsoft.com', password: 'fortnight' }
+                    await request(server).post('/api/auth/company/login').send(loginCompany)
                         .then(res => {
                             expect(res.body.token).toBe(`${res.body.token}`)
                         })
@@ -60,13 +48,37 @@ describe('company-auth-router', function () {
         })
 
         it('should return a 201', async function () {
-            const user = { email: 'Katz@utilzexample.com', password: 'fortnight', name: 'Katz Deli', location: 'London' }
-            await request(server).post('/api/auth/register').send(user)
+            const company = { email: 'bill@microsoft.com', password: 'fortnight', name: 'Microsoft', location: 'France' }
+            await request(server).post('/api/auth/company/register').send(company)
                 .then(async res => {
-                    const loginUser = { email: 'Katz@utilzexample.com', password: 'fortnight' }
-                    await request(server).post('/api/auth/login').send(loginUser)
+                    const loginCompany = { email: 'bill@microsoft.com', password: 'fortnight' }
+                    await request(server).post('/api/auth/company/login').send(loginCompany)
                         .then(res => {
                             expect(res.status).toBe(200)
+                        })
+                })
+        })
+
+        it('should return a 400', async function () {
+            const company = { email: 'bill@microsoft.com', password: 'fortnight', name: 'Microsoft', location: 'France' }
+            await request(server).post('/api/auth/company/register').send(company)
+                .then(async res => {
+                    const loginCompany = { email: 'paul@microsoft.com', password: 'github' }
+                    await request(server).post('/api/auth/company/login').send(loginCompany)
+                        .then(res => {
+                            expect(res.status).toBe(400)
+                        })
+                })
+        })
+
+        it('should return a 401 for wrong password', async function () {
+            const company = { email: 'bill@microsoft.com', password: 'fortnight', name: 'Microsoft', location: 'France' }
+            await request(server).post('/api/auth/company/register').send(company)
+                .then(async res => {
+                    const loginCompany = { email: 'bill@microsoft.com', password: 'github' }
+                    await request(server).post('/api/auth/company/login').send(loginCompany)
+                        .then(res => {
+                            expect(res.status).toBe(401)
                         })
                 })
         })
