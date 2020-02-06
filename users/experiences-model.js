@@ -4,6 +4,7 @@ module.exports = {
 	add,
 	find,
 	findById,
+	findByIdInUser,
 	update,
 	remove
 };
@@ -22,13 +23,17 @@ async function add(id, experience) {
 }
 
 // MARK: -- Find all experiences for hunter
-function find(userId) {
-	return db('experiences').where('user_id', userId)
+function find(user_id) {
+	return db('experiences').where('user_id', user_id)
 }
 
 // MARK: -- Find by id
 function findById(id) {
 	return db('experiences').where('id', id).first();
+}
+
+function findByIdInUser(experience_id, user_id) {
+    return db('experiences').where('experiences.user_id', user_id).where("id", experience_id).first();
 }
 
 // MARK: -- Update
