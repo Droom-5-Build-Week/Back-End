@@ -18,6 +18,9 @@ router.get('/:id', (req, res) => {
 		if(id) {
 			Users.findUserDetails(id)
 				.then(user => {
+					if(user == undefined) {
+						res.status(404).json({ message: 'could not find user' })
+					}
 					res.status(200).json(user);
 				})
 				.catch(err => {

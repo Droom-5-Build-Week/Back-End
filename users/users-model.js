@@ -44,21 +44,26 @@ function remove(id) {
 }
 
 
-function findUserDetails(id) {
-	return db('users')
-		.where('id', id)
-		.select('id', 'name', 'email', 'location', 'personal_skills', 'personal_interests')
-		.first()
-		.then(users => {
-			return db('experiences')
-				.where('experiences.user_id', id)
-				.select('job_title', 'company_name')
-				.then(experiences => {
-					return {
-						...users,
-						experiences
-					}
+async function findUserDetails(id) {
+	const user = await findById(id)
+	if(user == undefined){
+		return
+	} else {
+		return db('users')
+			.where('id', id)
+			.select('id', 'name', 'email', 'location', 'personal_skills', 'personal_interests')
+			.first()
+			.then(users => {
+				return db('experiences')
+					.where('experiences.user_id', id)
+					.select('job_title', 'company_name')
+					.then(experiences => {
+						return {
+							...users,
+							experiences
+						}
 
-				})
-		})
+					})
+			})
+	}
 }
