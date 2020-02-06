@@ -6,10 +6,10 @@ const restricted = require('../auth/restricted-middleware.js');
 router.get('/', (req, res) => {
 	Users.find()
 		.then(users => {
-			res.json(users);
+			res.status(200).json(users);
 		})
 		.catch(err => {
-			res.send(err);
+			res.status(401).send(err);
 		})
 });
 
