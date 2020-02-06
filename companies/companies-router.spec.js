@@ -59,7 +59,7 @@ describe('company-router', function () {
             await request(server).post('/api/auth/login').send(newCompany)
                 .then(async company => {
                     const id = company.body.id;
-                    const res = await request(server).get(`api/companies/:id`, newerCompany).set('authorization', company.body.token)
+                    const res = await request(server).put(`api/companies/:id`, newerCompany).set('authorization', company.body.token)
                     expect(res.body.name).toBe("NotMicrosoft");
                 })
         })
