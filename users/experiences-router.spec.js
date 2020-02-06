@@ -15,6 +15,7 @@ describe('experience-router', function () {
 
 	beforeEach(async function () {
 		await db('users').truncate();
+		await db('experiences').truncate();
 	})
 
 	describe('test environment', function () {
@@ -34,7 +35,7 @@ describe('experience-router', function () {
 					const res = await request(server)
 						.post('/api/users/1/experiences')
 						.set('authorization', user.body.token)
-						.send({'company_name': 'Grass Roots Inc', 'job_title': 'Junior Seed Scientist' })
+						.send({'company_name': 'Grass Roots Inc', 'job_title': 'Junior Seed Scientist'})
 					expect(res.status).toBe(201);
 				})
 		})
@@ -77,71 +78,57 @@ describe('experience-router', function () {
 				.then(async user => {
 					token = user.body.token
 					await request(server)
-						.get('/api/users/1/experiences/115')
+						.post('/api/users/1/experiences')
 						.set('authorization', token)
-						.then(res => {
-							expect(res.body.company_name).toBe('Grass Roots Inc');
+						.send({'company_name': 'Grass Roots Inc', 'job_title': 'Junior Seed Scientist'})
+						.then(async post => {
+							await request(server)
+								.get('/api/users/1/experiences/1')
+								.set('authorization', token)
+								.then(res => {
+									expect(res.body.company_name).toBe('Grass Roots Inc');
+							})
 						})
 				})
 		})
 
-		it('GET one experience for user', async function () {
+		it('Update experience for user', async function () {
 			let token;
 			await request(server).post('/api/auth/register').send(user)
 			await request(server).post('/api/auth/login').send(user)
 				.then(async user => {
 					token = user.body.token
-					const res = await request(server)
-						.put('/api/users/1/experiences/115')
+					await request(server)
+						.post('/api/users/1/experiences')
 						.set('authorization', token)
-						.send({'company_name': 'Bamboo United'})
-					console.log(res.body.message)
-					expect(res.body.company_name).toBe('Bamboo United');
+						.send({'company_name': 'Grass Roots Inc', 'job_title': 'Junior Seed Scientist'})
+						.then(async post => {
+							const res = await request(server)
+												.put('/api/users/1/experiences/1')
+												.set('authorization', token)
+												.send({'company_name': 'Bamboo United'})
+							expect(res.body.company_name).toBe('Bamboo United');
+						})
+				})
+		})
+
+		it('Delete experience from user', async function () {
+			let token;
+			await request(server).post('/api/auth/register').send(user)
+			await request(server).post('/api/auth/login').send(user)
+				.then(async user => {
+					token = user.body.token
+					await request(server)
+						.post('/api/users/1/experiences')
+						.set('authorization', token)
+						.send({'company_name': 'Grass Roots Inc', 'job_title': 'Junior Seed Scientist'})
+						.then(async post => {
+							const res = await request(server)
+												.delete('/api/users/1/experiences/1')
+												.set('authorization', token)
+							expect(res.body.message).toBe('experience successfully deleted');
+						})
 				})
 		})
 	})
 });
-
-	// describe('/api/users/:user_id/experiences/:id', function () {
-	// 	it('Get exp by id', async function () {
-	// 		await request(server).post('/api/auth/register').send(user)
-	// 		await request(server).post('/api/auth/login').send(user)
-	// 			.then(async user => {
-	// 				const res = await request(server).get('/api/users/1').set('authorization', user.body.token)
-	// 				expect(res.body.id).toBe(1);
-	// 			})
-	// 	})
-
-	// 	it('Get user by id', async function () {
-	// 		await request(server).post('/api/auth/register').send(user)
-	// 		await request(server).post('/api/auth/login').send(user)
-	// 			.then(async user => {
-	// 				const res = await request(server).get('/api/users/1').set('authorization', user.body.token)
-	// 				expect(res.status).toBe(200);
-	// 			})
-	// 	})
-
-	// 	it('Put user by id ', async function () {
-	// 		await request(server).post('/api/auth/register').send(user)
-	// 		await request(server).post('/api/auth/login').send(user)
-	// 			.then(async user => {
-	// 				const res = await request(server)
-	// 					.put('/api/users/1')
-	// 					.set('authorization', user.body.token)
-	// 					.send({'name': 'Rachel Next'})
-	// 				expect(res.status).toBe(201)
-	// 			})
-	// 	})
-
-	// 	it('Delete user by id', async function () {
-	// 		await request(server).post('/api/auth/register').send(user)
-	// 		await request(server).post('/api/auth/login').send(user)
-	// 			.then(async user => {
-	// 				const res = await request(server)
-	// 					.delete('/api/users/1')
-	// 					.set('authorization', user.body.token)
-	// 				expect(res.status).toBe(200);
-	// 			})
-	// 	})
-
-	// })
