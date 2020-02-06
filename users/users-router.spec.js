@@ -24,7 +24,8 @@ describe('users-router', function () {
 	})
 
 	describe('/api/users', function () {
-		it('GET all users to be 200 status code', async function () {
+
+		it('GET all users and return 200 status code', async function () {
 			await request(server).post('/api/auth/register').send(user)
 			await request(server).post('/api/auth/login').send(user)
 				.then(async user => {
@@ -53,12 +54,12 @@ describe('users-router', function () {
 				})
 		})
 
-		it('Get user by id and return 1st experience job_title', async function () {
+		it('Get user by id', async function () {
 			await request(server).post('/api/auth/register').send(user)
 			await request(server).post('/api/auth/login').send(user)
 				.then(async user => {
-					const res = await request(server).get('/api/users/2').set('authorization', user.body.token)
-					expect(res.body.experiences[0].job_title).toBe('Manager');
+					const res = await request(server).get('/api/users/1').set('authorization', user.body.token)
+					expect(res.status).toBe(200);
 				})
 		})
 
@@ -67,7 +68,7 @@ describe('users-router', function () {
 			await request(server).post('/api/auth/login').send(user)
 				.then(async user => {
 					const res = await request(server)
-						.put('/api/users/2')
+						.put('/api/users/1')
 						.set('authorization', user.body.token)
 						.send({'name': 'Rachel Next'})
 					expect(res.status).toBe(201)
@@ -79,7 +80,7 @@ describe('users-router', function () {
 			await request(server).post('/api/auth/login').send(user)
 				.then(async user => {
 					const res = await request(server)
-						.delete('/api/users/3')
+						.delete('/api/users/1')
 						.set('authorization', user.body.token)
 					expect(res.status).toBe(200);
 				})

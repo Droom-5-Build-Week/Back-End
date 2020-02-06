@@ -62,6 +62,7 @@ router.post('/:user_id/experiences', (req, res) => {
 
 router.put('/:user_id/experiences/:id', (req, res) => {
     const { user_id, id } = req.params;
+    const body = req.body;
     Users.findById(user_id)
         .then(user => {
             if(user.id == user_id && id && body) {
@@ -86,6 +87,7 @@ router.put('/:user_id/experiences/:id', (req, res) => {
                 res.status(404).json({ message: 'No user by that id' });
             }
         }).catch(err => {
+            console.log(err);
             res.status(404).json({ message: 'Could not return user to update experience' });
         })
 });
