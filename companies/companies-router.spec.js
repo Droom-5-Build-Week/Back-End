@@ -39,39 +39,52 @@ describe('company-router', function () {
                     expect(res.status).toBe(200);
                 })
         })
+
+        it('status code 401 to get because not setting token', async function () {
+            await request(server).post('/api/auth/company/register').send(newCompany)
+            await request(server).post('/api/auth/company/login').send(newCompany)
+                .then(async user => {
+                    const res = await request(server).get('/api/companies')
+                    expect(res.status).toBe(401);
+                })
+        })
     })
 
     describe('/api/companies/:id', function () {
-
-        it('Get company by id status 200', async function () {
-            await request(server).post('/api/auth/company/register').send(newCompany)
-            await request(server).post('/api/auth/company/login').send(newCompany)
-                .then(async company => {
-                    const res = await request(server).get(`api/companies/1`).set('authorization', company.body.token)
-                    expect(res.status).toBe(200);
-                })
-        })
 
         it('Get company by id', async function () {
             await request(server).post('/api/auth/company/register').send(newCompany)
             await request(server).post('/api/auth/company/login').send(newCompany)
                 .then(async company => {
-                    const res = await request(server).get(`api/companies/1`).set('authorization', company.body.token)
-                    expect(res.body.id).toBe(1);
+                    const res = await request(server).get('/api/companies/1')
+                        .set('authorization', company.body.token)
+                    expect(res.status).toBe(200);
                 })
         })
 
-        // it('Get company by id', async function () {
-        //     await request(server).post('/api/auth/company/register').send(newCompany)
-        //     await request(server).post('/api/auth/company/login').send(newCompany)
-        //         .then(async company => {
-        //             const id = company.body.id;
-        //             const res = await request(server)
-        //                 .put(`api/companies/1`, newerCompany)
-        //                 .set('authorization', company.body.token)
-        //             expect(res.body.name).toBe("Melinda Gates Foundation");
-        //         })
-        // })
+        it('Put company by id', async function () {
+            await request(server).post('/api/auth/company/register').send(newCompany)
+            await request(server).post('/api/auth/company/login').send(newCompany)
+                .then(async company => {
+                    const res = await request(server)
+                        .put('/api/companies/1')
+                        .set('authorization', company.body.token)
+                        .send({'name': 'Melinda Gates Foundation'})
+                    expect(res.status).toBe(201);
+                })
+        })
+
+        it('Delete company by id', async function () {
+            await request(server).post('/api/auth/company/register').send(newCompany)
+            await request(server).post('/api/auth/company/login').send(newCompany)
+                .then(async company => {
+                    const res = await request(server)
+                        .delete('/api/companies/1')
+                        .set('authorization', company.body.token)
+                    expect(res.body.message).toBe('Company successfully deleted');
+                })
+        })
+
     })
 
 })
