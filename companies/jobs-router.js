@@ -1,7 +1,7 @@
 const router = require('express').Router();
 
 const Jobs = require('./jobs-model.js');
-const Companies = require('./Companies-model.js')
+const Companies = require('./companies-model.js')
 const restricted = require('../auth/restricted-middleware.js');
 
 router.get('/:company_id/jobs', (req, res) => {
