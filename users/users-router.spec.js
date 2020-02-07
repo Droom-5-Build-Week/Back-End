@@ -12,7 +12,7 @@ describe('users-router', function () {
 		personal_interests: 'Reading Fictions, Yoyoing',
 		personal_skills: 'analysis, research, management'
 	}
-
+	///
 	beforeEach(async function () {
 		await db('users').truncate();
 	})
