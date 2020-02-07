@@ -13,7 +13,7 @@ module.exports = {
 // MARK: -- Add Skill to hunter
 async function add(id, job) {
     //let user_id = db('users').where('id', id).select('id').first();
-    return db('jobs').insert({ "position_name": job.position_name, "type": job.type, "job_bio": job.job_bio, "duration": job.duration, "company_id": id })
+    return db('jobs').insert({ "position_name": job.position_name, "type": job.type, "job_bio": job.job_bio, "duration": job.duration, "skills": job.skills, "company_id": id })
         .then(() => {
             return db('jobs').where("company_id", id)
         })
@@ -21,7 +21,7 @@ async function add(id, job) {
 // MARK: -- Find all skills for hunter
 function find(companyId) {
     return db('jobs').where('company_id', companyId)
-    .select('id', 'position_name', 'type', 'job_bio', 'duration', 'skills')
+        .select('id', 'position_name', 'type', 'job_bio', 'duration', 'skills')
 }
 
 // MARK: -- Find by id

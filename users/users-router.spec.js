@@ -5,9 +5,9 @@ const db = require('../database/db-config.js');
 describe('users-router', function () {
 
 	const user = {
-		email: 'Katz@utilzexample.com', 
-		password: 'fortnight', 
-		name: 'Katz Deli', 
+		email: 'Katz@utilzexample.com',
+		password: 'fortnight',
+		name: 'Katz Deli',
 		location: 'London',
 		personal_interests: 'Reading Fictions, Yoyoing',
 		personal_skills: 'analysis, research, management'
@@ -69,7 +69,7 @@ describe('users-router', function () {
 					const res = await request(server)
 						.put('/api/users/2')
 						.set('authorization', user.body.token)
-						.send({'name': 'Rachel Next'})
+						.send({ 'name': 'Rachel Next' })
 					expect(res.status).toBe(201)
 				})
 		})
